@@ -1,0 +1,11 @@
+{
+    "login" : "Tu wpisz login do https://mapa-turystyczna.pl", 
+    "password" : "Tu wpisz hasło do https://mapa-turystyczna.pl",
+    "time_multiplier" : 1.2,
+    "first_image" : "1.jpg",
+    "second_image" : "2.jpg",
+    "third_image" : "3.jpg",
+    "presentation_width_inches" : 13.33,
+    "presentation_height_inches" : 7.5,
+    "pixels_per_inch" : 96
+}
