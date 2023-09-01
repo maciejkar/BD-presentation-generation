@@ -1,0 +1,258 @@
+WindowMenager:
+    FirstWindow:
+    SecondWindow:
+    ThirdWindow:
+    FourthWindow:
+
+
+<FirstWindow>:
+    name: "first"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width , root.height
+
+        Label:
+            text: "Tworzenie prezentacji na Biały Dunajec , MOST  \n by Maciej Karczewski"
+            font_size: 32
+            multilane: True
+            size_hint : 1 , 0.3
+        Label:
+            text: "Krok 1 : W pliku settings.json wpisz dane potrzebne do zalogowania na mapa-turystyczna.pl"
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
+            font_size: 20
+            multilane: True
+            size_hint : 1 , 0.2
+        Label:
+            text: "Krok 2 : Jak ma się nazywać pezentacja i folder w którym powstanie "
+            
+            text_size: self.width, None
+            size_hint: 1, None
+            
+            height: self.texture_size[1]
+            font_size: 20
+            multilane: True
+            size_hint : 1 , 0.1
+        TextInput:
+            id: file_name
+            font_size: 20
+            size_hint: 1 , 0.05
+            multilane: False
+        Label:
+            text: "Krok 3 : Podaj link do trasy "
+            font_size: 20
+            multilane: True
+            size_hint : 1 , 0.1
+        TextInput:
+            id: path
+            multilane: False
+            font_size: 20
+            size_hint: 1 , 0.05
+            
+        
+        Button:
+            text:"Dalej"
+            font_size: 32
+            size_hint : 1 , 0.1
+            on_release: 
+                root.start_scrap()
+                app.root.current = "second"
+                root.manager.transition.direction = "left"
+                
+
+
+
+
+
+
+<SecondWindow>:
+    name: "second"
+    on_pre_enter: root.load_backgrounds()
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width , root.height
+
+        Label:
+            text: "Tworzenie prezentacji na Biały Dunajec , MOST  \n by Maciej Karczewski"
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
+            font_size: 32
+            multilane: True
+            size_hint : 1 , 0.1
+        Label:
+            text: "Krok 4 : Wybierz tło prezentacji "
+            font_size: 30
+            multilane: True
+            size_hint : 1 , 0.1
+        Spinner:
+            id: background_spinner
+            text: ''
+            size_hint : 1 , 0.2
+            values: ''
+
+            on_text: root.change_background(background_spinner.text)
+        
+        Image:
+            id: image
+            source: ''
+            allow_stretch: True
+            keep_ratio: False
+            size_hint : 1 , 0.5
+
+        Button:
+            text:"Dalej"
+            font_size: 32
+            size_hint : 1 , 0.1
+            on_release: 
+                root.add_background()
+                app.root.current = "third"
+                root.manager.transition.direction = "left"
+
+
+
+<ThirdWindow>:
+    name: "third"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width , root.height
+
+        Label:
+            text: "Tworzenie prezentacji na Biały Dunajec , MOST  \n by Maciej Karczewski"
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
+            font_size: 32
+            multilane: True
+            size_hint : 1 , 0.2
+        Label:
+            text: "Krok 5 : Podaj nazwę trasy"
+            font_size: 20
+            multilane: True
+            size_hint : 1 , 0.2
+        TextInput:
+            id: name_of_route
+            font_size: 20
+            size_hint: 1 , 0.1
+        Label:
+            text: "Krok 6 : Podaj poziom trudności  "
+            font_size: 20
+            multilane: True
+            size_hint : 1 , 0.2
+        TextInput:
+            id: level
+            font_size: 20
+            size_hint: 1 , 0.1
+        Label:
+            text: "Krok 7 : Podaj kto prowadzi   "
+            font_size: 20
+            multilane: True
+            size_hint : 1 , 0.2
+        TextInput:
+            id: leader
+            font_size: 20
+            size_hint: 1 , 0.1
+        Label:
+            text: "Krok 8 : Podaj uwagi rozdzielone przecinkiem "
+            font_size: 20
+            multilane: True
+            size_hint : 1 , 0.2
+        TextInput:
+            id: coutions
+            font_size: 20
+            size_hint: 1 , 0.1
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint: 1 , 0.1
+        
+            Button:
+                text:"Wstecz"
+                font_size: 32
+                on_release: 
+                    app.root.current = "second"
+                    root.manager.transition.direction = "right"
+            Button:
+                text:"Dalej"
+                font_size: 32
+                on_release: 
+                    root.add_data()
+                    app.root.current = "fourth"
+                    root.manager.transition.direction = "left"
+
+
+<FourthWindow>:
+    name: "fourth"
+    on_enter: root.edit_labels()
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width , root.height
+        Label:
+            text: "Tworzenie prezentacji na Biały Dunajec , MOST  \n by Maciej Karczewski"
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
+
+            font_size: 32
+            multilane: True
+            size_hint : 1 , 0.2
+
+        Label:
+            id: path_image
+            text: ""
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
+            font_size: 20
+            multilane: True
+            size_hint : 1 , 0.2
+        Label:
+            id: first_view
+            text: ""
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
+            font_size: 20
+            multilane: True
+            size_hint : 1 , 0.2
+
+        Label:
+            id: second_view
+            text: ""
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
+            font_size: 20
+            multilane: True
+            size_hint : 1 , 0.2
+        Label:
+            id: third_view
+            text: ""
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
+            font_size: 20
+            multilane: True
+            size_hint : 1 , 0.2
+
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint: 1 , 0.1
+            Button:
+                text:"Wstecz"
+                font_size: 32
+                on_release: 
+                    app.root.current = "third"
+                    root.manager.transition.direction = "right"
+            Button:
+                text:"Stwórz i otwórz"
+                font_size: 32
+                on_release: 
+                    root.make_presentation()
+                    app.root.current = "fourth"
+                    root.manager.transition.direction = "left"
+
+
